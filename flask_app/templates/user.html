@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Authors</title>
+    <title>Document</title>
+</head>
+<style>
+    .box {
+        
+        width: 100%;
+        min-height: 60%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    
+</style>
+<body>
+    <div class="d-flex flex-wrap justify-content-around">
+    <h1> Hello {{session['user_first_name']}}!</h1>
+    <a href="/logout">Logout</a> 
+    </div>
+    <div class="box">
+    <p>Here are your appointments</p>
+    <div>
+        <a href="/create_appointment">Create Appointment</a>
+        <table border="1">
+            <tr>
+                <th>Task</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            {% for appointments in appointments %}
+            <tr>
+                <td>{{appointments.task}}</td>
+                <td>{{appointments.date}}</td>
+                <td>{{appointments.status}}</td>
+                {% if appointments.status == 'pending' %} 
+                <td><a href="/update_appointment/{{appointments.id}}">Update</a>| <a href="/delete_appointment/{{appointments.id}}">Delete</a></td>
+                {% else %}
+                <td>Done</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div>
+        <p>Past Appointments</p>
+        <table border="1">
+            <tr>
+                <th>Task</th>
+                <th>Date</th>
+            </tr>
+            {% for appointments in appointments %}
+            {% if appointments.date < today.date() or (appointments.date == today.date() and appointments.time < today.time()) %}
+                <tr>
+                <td>{{appointments.task}}</td>
+                <td>{{appointments.date}}</td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+    </div>
+    </div>
+</body>
+</html>

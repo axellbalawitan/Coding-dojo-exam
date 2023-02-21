@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<style>
+        .box {
+        width: 100%;
+        min-height: 60%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+</style>
+<body>
+    <div class="d-flex flex-wrap justify-content-around">
+    <h1>Edit an Appointment</h1>
+    <a href="/logout">Logout</a>
+    </div>
+    <div class="box">
+    <form action="/updateappointment" method="post">
+        <div>
+            <label for="task">Task:</label><br>
+            <input type="text" name="task" value="{{ appointment.task }}" placeholder="input your task">
+        </div>
+        <div>
+            <label for="date">Date:</label><br>
+            <input type="date" name="date" value="{{ appointment.date }}">
+        </div>
+        <div>
+            <p>Status?</p>
+            <select name="status" id="appointments">
+                <option value="pending" name="status" {% if appointment.status == 'pending' %}selected{% endif %}> Pending </option>
+                <option value="missed" name="status" {% if appointment.status == 'missed' %}selected{% endif %}> Missed </option>
+                <option value="done" name="status" {% if appointment.status == 'done' %}selected{% endif %}> Done </option>
+            </select>
+        </div>
+        <div>
+            <br>
+            <button type="submit" value="Submit Appointment!">Submit Appointment!</button>
+        </div>
+    </form>
+    </div>
+
+</body>
+</html>

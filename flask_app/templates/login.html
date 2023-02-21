@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .container {
+        display: flex;
+        justify-content: space-around;
+        width: auto;
+        height: auto;
+        border: solid 2px black;
+        background-color: #494848;
+        padding: 25px;
+    }
+    h1 {
+        color: aqua;
+    }
+
+    label {
+        color: white;
+    }
+    
+</style>
+<body>
+    <div class="container">
+        <div class="row">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                    {% for message in messages %}
+                    <p>{{message}}</p>
+                    {% endfor %}
+            {% endif %}
+        {% endwith %}
+            <h1>Register :</h1>
+            <form action="/register_user" method="POST">
+                <div>
+                    <label for="first_name">First Name:</label><br>
+                    <input type="text" name="first_name" placeholder="input your first name">
+                </div>
+                <div>
+                    <label for="last_name">Last Name:</label><br>
+                    <input type="text" name="last_name" placeholder="input your last name">
+                </div>
+                <div>
+                    <label for="email">Email:</label><br>
+                    <input type="email" name="email" placeholder="input your email">
+                </div>
+                <div>
+                    <label for="password">Password:</label><br>
+                    <input type="password" name="password" placeholder="input your password">
+                </div>
+                <div>
+                <div>
+                    <label for="confirm-password">Confirm Password:</label><br>
+                    <input type="password" name="confirm_password" placeholder="confirm your password">
+                </div>
+                    <br>
+                    <button type="submit">Register</button>
+                </div>
+            </form>  
+        </div>
+        <div>
+            <h1>Login :</h1>
+            <form action="/login_user" method="POST">
+                <div>
+                    <label for="email">Email:</label><br>
+                    <input type="email" name="email" id="email">
+                </div>
+                <div>
+                    <label for="password">Password:</label><br>
+                    <input type="password" name="password" id="password">
+                </div>
+                <div>
+                    <br>
+                    <button type="submit">Login</button>
+                </div>
+            </form>  
+        </div>
+</body>
+</html>

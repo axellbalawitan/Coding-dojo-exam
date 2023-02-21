@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<style>
+        .box {
+        
+        width: 100%;
+        min-height: 60%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+</style>
+<body>
+    <div class="d-flex flex-wrap justify-content-around">
+    <h1>Add an Appointment</h1>
+    <a href="/logout">Logout</a>
+    </div>
+    <div class="box">
+    <form action="/new_appointment" method="post">
+        <div>
+            <label for="task">Task:</label><br>
+            <input type="text" name="task" placeholder="input your task">
+        </div>
+        <div>
+            <label for="date">Date:</label><br>
+            <input type="date" name="date">
+        </div>
+        <div>
+            <p>Status?</p>
+            <select name="status" id="appointments">
+                <option value="pending" name="status">Pending</option>
+                <option value="missed" name="status">Missed</option>
+                <option value="done" name="status">Done</option>
+            </select>
+        </div>
+        <div>
+            <br>
+            <button type="submit" value="Submit Appointment!">Submit Appointment!</button>
+        </div>
+    </form>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+{% endwith %}
+    </div>
+</body>
+</html>
